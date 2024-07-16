@@ -10,7 +10,6 @@ import (
 	"hash/fnv"
 	"html/template"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime/debug"
@@ -376,7 +375,7 @@ func resolveOverrides(opts commandOptions) ([]gomarkdoc.RendererOption, error) {
 			continue
 		}
 
-		b, err := ioutil.ReadFile(f)
+		b, err := os.ReadFile(f)
 		if err != nil {
 			return nil, fmt.Errorf("gomarkdoc: couldn't resolve template for %s: %w", name, err)
 		}
@@ -414,7 +413,7 @@ func resolveHeader(opts commandOptions) (string, error) {
 	}
 
 	if opts.headerFile != "" {
-		b, err := ioutil.ReadFile(opts.headerFile)
+		b, err := os.ReadFile(opts.headerFile)
 		if err != nil {
 			return "", fmt.Errorf("gomarkdoc: couldn't resolve header file: %w", err)
 		}
@@ -431,7 +430,7 @@ func resolveFooter(opts commandOptions) (string, error) {
 	}
 
 	if opts.footerFile != "" {
-		b, err := ioutil.ReadFile(opts.footerFile)
+		b, err := os.ReadFile(opts.footerFile)
 		if err != nil {
 			return "", fmt.Errorf("gomarkdoc: couldn't resolve footer file: %w", err)
 		}
@@ -558,7 +557,7 @@ func getSpecs(paths ...string) []*PackageSpec {
 
 			p := e.Value.(string)
 
-			files, err := ioutil.ReadDir(p)
+			files, err := os.ReadDir(p)
 			if err != nil {
 				// If we couldn't read the folder, there are no directories that
 				// we're going to find beneath it

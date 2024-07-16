@@ -8,7 +8,6 @@ import (
 	"go/parser"
 	"go/token"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -385,7 +384,7 @@ func NewLocation(cfg *Config, node ast.Node) Location {
 }
 
 func parsePkgFiles(pkgDir string, fs *token.FileSet) ([]*ast.File, error) {
-	rawFiles, err := ioutil.ReadDir(pkgDir)
+	rawFiles, err := os.ReadDir(pkgDir)
 	if err != nil {
 		return nil, fmt.Errorf("gomarkdoc: error reading package dir: %w", err)
 	}
