@@ -123,7 +123,7 @@ type mockRepoFormat struct {
 	r string
 }
 
-func (m *mockRepoFormat) CodeHref(loc lang.Location) (string, error) {
+func (m *mockRepoFormat) CodeHref(_ lang.Location) (string, error) {
 	return m.r, nil
 }
 
